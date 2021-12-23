@@ -17,15 +17,15 @@
 
 The goal of this project is to Detect Anomalies in credit card transactions. Machine learning algorithms are being developed to detect fraudulent credit card transactions. 
 We will be using the following algorithms for Anomaly detection in this project and then compare their performances:
-1. Supervised Learning models
+1. Supervised Learning models:
     - Random Forest
     - Bagging Classifiers
     - Logistic Regression
     - Support Vector Machines
     - Neural Networks
 <br>   
-2. Unsupervised Learning models
-    - K-Means Clustering
+2. Unsupervised Learning models:
+    - KMeans Clustering
     - Isolation Forest
     - Local Outlier Factor
     - One Class SVM
@@ -46,27 +46,27 @@ More broadly, what is Anomaly Detection? Anomaly Detection is the technique of i
 - **Supervised Anomaly Detection**: This method requires a labeled dataset containing both normal and anomalous samples to construct a predictive model to classify future data points. The most commonly used algorithms for this purpose are supervised Neural Networks, Support Vector Machine learning, K-Nearest Neighbors Classifier, Logistic Regression, etc.
 - **Unsupervised Anomaly Detection**: This method is applied on unlabeled data and assumes two things about the data ie Only a small percentage of data is anomalous and Any anomaly is statistically different from the normal samples. Based on the above assumptions, the data is then clustered using a similarity measure and the data points which are far off from the cluster are considered to be anomalies. Commonly used algorithms are K-Means and Isolation Forest, Local Outlier Factor and One Class SVM classifiers.
 
-<br>
+
 ## Challenges in ML training
 Some of the common challenges related to training machine learning models for credit card fraud detection are: **Imbalanced dataset**, this is one of the key challenges in relation to training models for detecting credit card fraudulent transactions. In order to tackle the imbalanced data set, SMOTE, a sampling technique is used. In this technique, the minority class i.e credit card fraudulent transactions are oversampled to balance out the dataset of credit cards not being used fraudulently and credit cards which are used fraudulently. SMOTE (Synthetic Minority Over-sampling Technique) technique can be used to generate new credit card examples by using the nearest neighbors of minority class credit cards. Another technique which can be used to creating balanced dataset is by leveraging K-means clustering and the genetic algorithm to create new data samples for minority clusters to create a balanced dataset. <br>
 In this project we will be using the SMOTE technique to tackle the unbalanced data.
 
-<br>
+
 ## Data Analysis and Modeling
 The dataset was already cleaned and did not need much preprocessing. Basic EDA showed Shape of the dataset was around 20400 transaction rows with 31 features. Out of which Class feature had 473 Fraud transactions represented as class -1 or in this case called the positive class. The one main thing you will notice about this data is that — The Fraud transactions was 0.17% of the total. Making the dataset imbalanced. Which seems pretty valid for such kind of data. Imbalanced datasets greatly hinders the performance of supervised learning. And we have to apply balancing techniques in order to model under supervised models. We’ll look at that in a moment. Also we can clearly notice from the stats, the average Money transaction for the fraudulent ones are more. This makes this problem crucial to deal with.<br>
 Next looking the distribution of Time and Amount feature, the feature 'Time' contains the seconds elapsed between each transaction and the first transaction in the dataset. Time is bimodal as you can see since the transactions are over a period of 2 days. Most number of transaction occur during the day than night. This feature does not tell much cause they seem like they are normal transactions. The Amount feature distribution had right skewed distribution. The mean of all credit card transactions in this data set was 88. The largest amount in transaction around 25000. Most of the transactions were small amounts.
-<br>
+
 ![Alt text](images/amt_feature.png)
-<br>
-![Alt text](amt_time_class.png)
-<br>
+
+![Alt text](images/amt_time_class.png)
+
 ### Modeling
 Before applying **Supervised Learning models** to the dataset, we have to address the issue of imbalance because most machine learning techniques will have poor performance on the minority class, and in this case the minority class is most important. 
 We used to SMOTE technique to balance the data and synthetically create datapoints. The dataset was then split into training and testing sets. <br>
 Various models under Supervised Learning (Logistic Regression, Random Forest, Bagging Classifier, SVM, Neural Networks) and under the Unsupervised Learning models, KMeans, Local Outlier Factor, Isolation Forest and One-Class SVM models were executed on the credit card dataset to determine fraud and non-fraud transactions and accuracy of analytical model is evaluated with help of confusion matrix. The models are evaluated based on parameters such as precession, recall, accuracy and F1 score and the computation time. Since test data is highly imbalanced we cannot look only at the accuracy scores.Recall and ROC AUC scores are important. 
 
 
- <br>   
+   
 ## Conclusions
 Various Supervised models were run on credit card fraud dataset and accuracy of analytical model. More emphasize will be given on recall in order to capture as many fraudulent cases as possible. The only catch here is the data that we have received for model training the data features are the transformed version of PCA. If the actual features follow a similar pattern then we are doing great!!<br>
 Since test data is highly imbalanced we cannot look only at the accuracy scores.Recall and ROC AUC scores are important. 
