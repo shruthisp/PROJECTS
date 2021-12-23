@@ -23,7 +23,7 @@ We will be using the following algorithms for Anomaly detection in this project 
     - Logistic Regression
     - Support Vector Machines
     - Neural Networks
-<br>   
+  
 2. Unsupervised Learning models:
     - KMeans Clustering
     - Isolation Forest
@@ -34,7 +34,8 @@ Dataset for this problem is taken from Kaggle Credit Card Fraud Detection ([sour
 1. The confidentiality of the user data is maintained.
 2. The features in the dataset are independent of each other due to PCA transformation.
 
-The authors also state that they use the behavioural characteristics of the owner of the card, which are shown by a variable representing the spending habits of the customer as well as the month, hour of the day, geographical location and type of merchant. Features V1, V2, … V28 are the principal components obtained with PCA, the only features which have not been transformed with PCA are 'Time' and 'Amount'. Feature 'Time' contains the seconds elapsed between each transaction and the first transaction in the dataset. The feature 'Amount' is the transaction Amount, this feature can be used for example-dependant cost-sensitive learning. Feature 'Class' is the response variable and it takes value 1 in case of fraud and 0 otherwise.
+The authors also state that they use the behavioural characteristics of the owner of the card, which are shown by a variable representing the spending habits of the customer as well as the month, hour of the day, geographical location and type of merchant. Features V1, V2, … V28 are the principal components obtained with PCA, the only features which have not been transformed with PCA are 'Time' and 'Amount'. Feature 'Time' contains the seconds elapsed between each transaction and the first transaction in the dataset. The feature 'Amount' is the transaction Amount, this feature can be used for example-dependant cost-sensitive learning. Feature 'Class' is the response variable and it takes value 1 in case of fraud and 0 otherwise.<br>
+**Note**: The data is in a zip folder please makesure to unzip the folder before running the notebook. 
 
 ## Background
 
