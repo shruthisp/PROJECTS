@@ -1,209 +1,119 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project 1: Standardized Test Analysis
+# Project 1: Standardized Test Analysis
+# Analysis of SAT & ACT datasets for 2019 and a peek into the test-optional admissions criteria
+ .
 
-### Overview
 
-Our first module in DSI covers:
-- Basic statistics and probability
-- Many Python programming concepts
-- Programmatically interacting with files and directories
-- Visualizations
-- EDA
-- Working with Jupyter notebooks for development and reporting
+ ## Contents:
+ 
+- [Problem Statement](#Problem-Statement)  
+- [Data](#Data)
+- [Data Dictionary](#Data-Dictionary)
+- [Outside Research](#Research)
+- [Data Analysis](#Data-Analysis)
+- [Conclusions and Recommendations](#Conclusions-and-Recommendations)
 
-You might wonder if you're ready to start doing data science. While you still have **tons** to learn, there are many aspects of the data science process that you're ready to tackle. Project 1 aims to allow you to practice and demonstrate these skills.
 
-For our first project, we're going to take a look at aggregate SAT and ACT scores and participation rates in the United States. We'll seek to identify trends in the data and combine our data analysis with outside research to address our problem statement.
+## Problem Statement:
 
-The SAT and ACT are standardized tests that many colleges and universities in the United States require for their admissions process. This score is used along with other materials such as grade point average (GPA) and essay responses to determine whether or not a potential student will be accepted to the university.
+High school students often know which colleges they would like to consider, but rarely know what SAT or ACT score they should aim for when applying to these colleges. This project aims to explore the relation between 
+1) the SAT score and the College Majors 
+2) trends in SAT and ACT participation for the year 2019  
 
-The SAT has two sections of the test: Evidence-Based Reading and Writing and Math ([*source*](https://www.princetonreview.com/college/sat-sections)). The ACT has 4 sections: English, Mathematics, Reading, and Science, with an additional optional writing section ([*source*](https://www.act.org/content/act/en/products-and-services/the-act/scores/understanding-your-scores.html)). They have different score ranges, which you can read more about on their websites or additional outside sources (a quick Google search will help you understand the scores for each test):
-* [SAT](https://collegereadiness.collegeboard.org/sat)
-* [ACT](https://www.act.org/content/act/en.html)
+What we would also like to see here is: Is there a relation between the number of applicants and the acceptance rates. How does the college prestige and acceptance rate relate. Will the test-option decision help the admission boards to evaluate the students based on GPA and overall achievements and not just a single test? 
+    
+  
+
+## Background:
 
 Standardized tests have long been a controversial topic for students, administrators, and legislators. Since the 1940's, an increasing number of colleges have been using scores from sudents' performances on tests like the SAT and the ACT as a measure for college readiness and aptitude ([*source*](https://www.minotdailynews.com/news/local-news/2017/04/a-brief-history-of-the-sat-and-act/)). Supporters of these tests argue that these scores can be used as an objective measure to determine college admittance. Opponents of these tests claim that these tests are not accurate measures of students potential or ability and serve as an inequitable barrier to entry.
 
-### Problem Statement
+Increasing number of universities are dropping SAT and ACT requirement for fall of 2021 admissions in response to the coronavirus pandemic.([source](https://www.cnn.com/2020/04/14/us/coronavirus-colleges-sat-act-test-trnd/index.html))Some of them announced it's going test-optional. This decision could benefit a lot of people: those students who no longer have access to test prep and other resources, schools can get more applicants and a more diverse pool of applicants, students will have the opportunity to be evaluated by more than just a score.
 
-Generally speaking, you will be asked to come up with a data science problem. This problem is ultimately up to you, but below are some guidelines/things to consider when crafting a problem statement:
-> 1. Consider your audience. Who is your project going to help? Who will your presentation be geared towards? Establishing your audience first can help you narrow down your scope.
-> 2. Consider the data you will use. Based on the contents of this data, think about some questions you could reasonably answer. These questions should aim to solve some kind of problem.
-> 3. Based on these questions, what would bring some kind value to your audience? This can be business insights, increase sales, make decisions, etc.
-> 4. Put everything from the above steps together into a few sentences that describe the specific problem you are trying to solve and who it will benefit.
-> [Here is a blog post](https://towardsdatascience.com/defining-a-data-science-problem-4cbf15a2a461) about crafting a data science problem statement.
+"Pre-pandemic there were 1,070 schools that were test-optional – one of whom was test-blind. Now there are 1,686, including 68 that are test-blind for fall 2021," says Robert Schaeffer, interim executive director of FairTest.([*source*](https://www.usnews.com/education/best-colleges/articles/how-the-coronavirus-is-pushing-colleges-to-go-test-optional)) What Test-Optional Means for Students: test-optional means students are not required to submit standardized test scores on their college admissions application, whether to do so is up to the student. Test-blind means that colleges won't look at scores even if a student submits them.
 
-Here are some example prompts if you need inspiration:
-> * The new format for the SAT was released in March 2016. As an employee of the College Board - the organization that administers the SAT - you are a part of a team that tracks statewide participation and recommends where money is best spent to improve SAT participation rates. Your presentation and report should be geared toward non-technical executives with the College Board and you will use the provided data and outside research to make recommendations about how the College Board might work to increase the participation rate in a *state of your choice*.
-> * You work for a school district that has asked you to advise their high school students on what SAT or ACT score they should be aiming for based on their intended area of study or school preferences.
-> * You are hired by the state of California to analyze standardized test performance for various districts in the state and identify trends so they can allocate resources appropriately.
-> * Lately, more and more schools are opting to drop the SAT/ACT requirement for their Fall 2021 applications ([*read more about this here*](https://www.cnn.com/2020/04/14/us/coronavirus-colleges-sat-act-test-trnd/index.html)). You are hired by a college to advise their admissions team on why this should or should not continue beyond the Fall 2021 applications. (Note: problem statements related to this prompt may not be reasonable to answer just using the data provided. If you want to tackle this one, you may need to find additional data online.)
-> * *Feel free to be creative with your own prompt!*
+In this project we will look for trends or relations between the acceptance/participation rates and SAT/ACT scores of 2019, and SAT scores for intended majors. We would also like to see how the acceptence rates fare for the prestigious schools. There are many criterias that makes an educational institution prestigeious, the Reputation, Selectivity, Funding, Faculty and more. For the sake of this project, we will be looking closely at the acceptance rates as the Selectivity criteria for the students, lower acceptance rates should correspond to prestigious schools/colleges.  
 
-And here are some example problem statements related to the above prompts. Come up with your own or modify these for your needs, do not just copy the ones given here:
-> * The new format for the SAT was released in March 2016. Since then, levels of participation in multiple states have changed with varying legislative decisions. This project aims to explore trends in SAT and ACT participation for the years 2017-2019 and seeks to identify states that have decreasing SAT participation rates.
-> * High school students often know which colleges they would like to consider, but rarely know what SAT or ACT score they should aim for when applying to these colleges. We wish to explore the schools that have the highest and lowest SAT and ACT score requirements and see if there is a relationship between college prestige and test scores.
-> * The state of California has many school districts. This project aims to identify the districts that have the worst overall student performance on the SAT and ACT tests so the state can recommend programs and allocate resources to these districts in need. 
-> * We hypothesize that student performance on these tests is not an indicator of overall academic performance. This project seeks to see if a relationship exists between student GPA and SAT/ACT scores to support or oppose the continuation of these tests as a requirement for college applications.
-> * *Feel free to be creative with your own problem statement!*
 
----
 
-### Datasets
+## Data
 
-#### Provided Data
-
-There are 10 datasets included in the [`data`](./data/) folder for this project. You are required to pick **at least two** of these to complete your analysis. Feel free to use more than two if you would like, or add other relevant datasets you find online.
-
-* [`act_2017.csv`](./data/act_2017.csv): 2017 ACT Scores by State ([source](https://blog.prepscholar.com/act-scores-by-state-averages-highs-and-lows))
-* [`act_2018.csv`](./data/act_2018.csv): 2018 ACT Scores by State ([source](https://blog.prepscholar.com/act-scores-by-state-averages-highs-and-lows))
 * [`act_2019.csv`](./data/act_2019.csv): 2019 ACT Scores by State ([source](https://blog.prepscholar.com/act-scores-by-state-averages-highs-and-lows))
-* [`act_2019_ca.csv`](./data/act_2019_ca.csv): 2019 ACT Scores in California by School ([source](https://www.cde.ca.gov/ds/sp/ai/) | [data dictionary](https://www.cde.ca.gov/ds/sp/ai/reclayoutact19.asp))
-* [`sat_2017.csv`](./data/sat_2017.csv): 2017 SAT Scores by State ([source](https://blog.collegevine.com/here-are-the-average-sat-scores-by-state/))
-* [`sat_2018.csv`](./data/sat_2018.csv): 2018 SAT Scores by State ([source](https://blog.collegevine.com/here-are-the-average-sat-scores-by-state/))
 * [`sat_2019.csv`](./data/sat_2019.csv): 2019 SAT Scores by State ([source](https://blog.prepscholar.com/average-sat-scores-by-state-most-recent))
 * [`sat_2019_by_intended_college_major.csv`](./data/sat_2019_by_intended_college_major.csv): 2019 SAT Scores by Intended College Major ([source](https://reports.collegeboard.org/pdf/2019-total-group-sat-suite-assessments-annual-report.pdf))
-* [`sat_2019_ca.csv`](./data/sat_2019_ca.csv): 2019 SAT Scores in California by School ([source](https://www.cde.ca.gov/ds/sp/ai/) | [data dictionary](https://www.cde.ca.gov/ds/sp/ai/reclayoutsat19.asp))
 * [`sat_act_by_college.csv`](./data/sat_act_by_college.csv): Ranges of Accepted ACT & SAT Student Scores by Colleges ([source](https://www.compassprep.com/college-profiles/))
 
-**Make sure you cross-reference your data with your data sources to eliminate any data collection or data entry issues.**
 
-#### Additional Data
-You are welcome to add any other data sources you find online to support your analysis, but this is **not required**.
+## Data Dictionary
 
----
+|Feature|Type|Dataset|Description|
+|:---|:---:|:---:|:---|
+|**state**|*object*|2019 Average SAT and ACT Scores by State |State in the United states of America.| 
+|**sat_participation**|*float64*|2019 Average SAT Scores by State|The percentage expressed as a float on the number of students enrolled in schools.|
+|**sat_reading_and_writing**|*int64*|2019 Average SAT Scores by State |The average English reading and writing score in a maximum score of 800.| 
+|**sat_math**|*int64*|2019 Average SAT Scores by State |The average math score in a maximum score of 800.| 
+|**sat_total**|*int64*|2019 Average SAT Scores by State |The combined score of sat_reading_and_writing and sat_math.| 
+|**act_participation**|*float64*|2019 Average ACT Scores by State|The percentage expressed as a float on the number of students enrolled in schools.|
+|**act_composite**|*float64*|2019 Average ACT Scores by State |The average of the 4 ACT scores for the state.| 
+|**college_major**|*object*|SAT Participation and Performance:Intended College Major|Intended College Major.| 
+|**sat_testtakers**|*int64*|SAT Participation and Performance:Intended College Major|2019 highschool graduates who took SAT during highschool.|
+|**accept_rate**|*float64*|SAT Participation and Performance:Intended College Major |The percentage expressed as a float on the number of students that were accepted.| 
+|**sat_reading_writing**|*int64*|SAT Participation and Performance:Intended College Major|Mean score of SAT English reading and writing.|
+|**sat_math**|*int64*|SAT Participation and Performance:Intended College Major|Mean score of SAT math test.|
+|**new_sat_total**|*int64*|SAT Participation and Performance:Intended College Major|The combined score of sat_reading_and_writing and sat_math.|
+|**school**|*object*|SAT and ACT Policies and Score Ranges for Popular Colleges and Universities |The names of popular four-year postsecondary institutions in the U.S.|
+|**policy_details**|*object*|SAT and ACT Policies and Score Ranges for Popular Colleges and Universities |Admission testing policies for the colleges and universities.|
+|**number_of_applicants**|*int64*|SAT and ACT Policies and Score Ranges for Popular Colleges and Universities |Number of applicants for the colleges and universities.|
+|**accept_rate**|*float64*|SAT and ACT Policies and Score Ranges for Popular Colleges and Universities |The percentage accepted expressed as a float.|
+|**sat_25th & 75th_percentile**|*float64*|SAT and ACT Policies and Score Ranges for Popular Colleges and Universities |Range of SAT scores of enrolled students.|
+|**act_25th & 75th_percentile**|*float64*|SAT and ACT Policies and Score Ranges for Popular Colleges and Universities |Range of ACT scores of enrolled students.|
+|**test_optional?_No**|*uint8*|SAT and ACT Policies and Score Ranges for Popular Colleges and Universities |Test policy of the school- SAt/ACT is NOT optional.|
+|**test_optional?_Yes**|*uint8*|SAT and ACT Policies and Score Ranges for Popular Colleges and Universities |Test policy of the school- SAt/ACT is optional.|
+|**test_optional?_Yes (TB)**|*uint8*|SAT and ACT Policies and Score Ranges for Popular Colleges and Universities |Test policy of the school- SAt/ACT is optional and test blind-meaning the policy will be re-evaluated at the end of the applicable period.|
+|**test_optional?_Yes (TF)**|*uint8*|SAT and ACT Policies and Score Ranges for Popular Colleges and Universities |Test policy of the school- SAt/ACT is not required or Test Free.|
+|**test_optional?_Yes***|*uint8*|SAT and ACT Policies and Score Ranges for Popular Colleges and Universities |Test policy of the school- SAt/ACT is Test Optional for some students and the admittance will be evaluated based on a GPA cut off.|
+|**years_applicable_from_2021**|*uint8*|SAT and ACT Policies and Score Ranges for Popular Colleges and Universities |Number of years the test policy of the school is applicable.|
 
-### Deliverables
 
-All of your projects will comprise of a written technical report and a presentation. As we continue in the course, your technical report will grow in complexity, but for this initial project it will comprise:
-- A Jupyter notebook that describes your data with visualizations & statistical analysis.
-- A README markdown file the provides an introduction to and overview of your project.
-- Your presentation slideshow rendered as a .pdf file.
-**NOTE**: Your entire Github repository will be evaluated as your technical report. Make sure that your files and directories are named appropriately, that all necessary files are included, and that no unnecessary or incomplete files are included.
 
-For your first presentation, you'll be presenting to a **non-technical** audience. You should prepare a slideshow with appropriately scaled visuals to complement a compelling narrative. **Presentation duration will differ by market, so check with your local instructor.**
+## Outside Research:
 
----
+Before the pandemic, a growing number of colleges stopped requiring applicants to submit SAT or ACT scores as a way to increase diversity on their campuses. But researchers are finding that the test-optional policy isn’t substantially raising the share of low-income students or students of color at colleges that have tried it.
+The latest study, published in the peer-reviewed American Educational Research Journal in April 2021, found that test-optional admissions increased the share of Black, Latino and Native American students by only 1 percentage point at about 100 colleges and universities that adopted the policy between 2005-06 and 2015-16. The share of low-income students, as measured by those who qualify for federal Pell Grants, also increased by only 1 percentage point on these campuses, compared to similar schools that continued to require SAT and ACT scores. 
+It will be interesting to see how the diversity of the 2021-22 freshman classes change when all the data are in. The other way to look at this is, if these colleges are picky, it could slow the momentum of test-optional admissions. Colleges had to hire many more admissions staffers and application readers to sift through applications without test scores. Test scores are an efficient way to shortlist the applicant pool. Having said this, will the colleges go test-optional or test-free in the near future? Only time and data will tell! 
 
-### Technical Report Starter Code
+([source](https://www.minotdailynews.com/news/local-news/2017/04/a-brief-history-of-the-sat-and-act/))
+([source](https://www.cnn.com/2020/04/14/us/coronavirus-colleges-sat-act-test-trnd/index.html))
+([source](https://oedb.org/rankings/acceptance-rate/))
+([source](https://education.seattlepi.com/university-prestigious-1307.html))
+([source](https://hechingerreport.org/proof-points-test-optional-policies-didnt-do-much-to-diversify-college-student-populations/))
+([source](https://medium.com/@james.dargan/participation-skews-state-averages-f68969371a01))
+([source](https://www.smithsonianmag.com/innovation/has-pandemic-put-end-to-sat-act-180978167/))    
 
-Future projects will require you to decide on the entire structure of your technical report. Here, we provide you with [starter code](./code/starter-code.ipynb) in a Jupyter notebook that will help to guide your data exploration and analysis. **If you choose to edit the core structure of this notebook, make sure you don't exclude any of the requested operations**.
+## Data Analysis:
 
----
+This notebook begins with importing and cleaning the '2019 SAT and ACT scores by US States', 'SAT 2019 and Intended college Major' and 'SAT ACT by colleges' datasets. SAT 2019 and ACT 2019 datasets were merged to create one dataset. 
+All the datatypes were recitfied based on the type of variable, for example: percentage values were converted from object to numeric. 
+Once cleaned, exploratory data analysis was performed to uncover trends in test scores and participation rates over the US States. 
+Reordered the data in 'SAT scores for intended majors' to extract useful information such as most aspired majors for high school students, 
+Correlations between the number of test-takers and acceptence rates. Further, data visualizations were made to state our problem statement and findings. 
 
-### Style Guide and Suggested Resources
+![Alt text](images/college_acceptrates.png)
+![Alt text](images/majors_sat.png)
+    
+## Conclusions and Recommendations:
 
-[Tim Dwyer](https://www.linkedin.com/in/jtimdwyer/) (former DSI student and TA) put together [this style guide](https://git.generalassemb.ly/DSI-R-628/course-info/blob/master/project_style_guide.md). Some recommendations are geared toward future projects (which will include modeling and span multiple notebooks), but generally these are great recommendations.
+Test Averages and Participation Correlate Negatively- for the States that have larger participation, the scores represent the average of the entire student body, thus pulling the state average down. And states that have lower participation rates have average score reflective of only the most high-performing students of the state. SAT total score is most positively correlated to the ACT Participation about 0.67.  SAT total score is negatively correlated to the SAT Participation indicating as SAT participation increases, the total SAT score decreases. When we compared the participation rates for SAT and ACT across the US states, The distributions of the 2 plots seem opposite to eachother.. Meaning that when there is higher SAT participation the ACT participation is low. More states have a 100% ACT participations compared to SAT.
+SAT & ACT Scores Correlate Negatively- States that have higher average SAT scores have lower average ACT scores and its the same the other way around.
+The spread of the scores for both the SAT and ACT are very similar. Even though the score ranges vary. SAT score ranges from out of 400-1600 and act ranges out of 1-36.
 
-Here's a link on [how to give a good lightning talk](https://www.semrush.com/blog/16-ways-to-prepare-for-a-lightning-talk/), which provides some good recommendations for short presentations.
+Intended college major indicates that the higher SAT scorers choose majors in STEM related fields.
+Students who desire to major in Science and Math statistics, Engineering and techology or Multi/Interdisciplinary Studies should score higher than 1100 in SATs The acceptance rate for Health Professions and related Clinical Sciences and Business, Management, Marketing and Engineering are the highest. The rates coincide proportionally with the SAT testtakers. Higher the testtakers higher is the acceptence rate. Students with highest average SAT math scores see themselves as future Mathematicians and statistics Majors
 
-[Here's a great summary](https://towardsdatascience.com/storytelling-with-data-a-data-visualization-guide-for-business-professionals-97d50512b407) of the main points of the book _Storytelling with Data_, which I can't recommend enough. [Here's a blog post](http://www.storytellingwithdata.com/blog/2017/8/9/my-guiding-principles) by the author about his guiding principles for visualizations.
+The ACT and SAT 75th percentile scores for the enrolled students and acceptance rates for the new admits are inversely proportional. Acceptance rates decrease as scores increases. We can further state that the colleges with high scores and low acceptance rates are among the prestigious colleges. Meaning the more competitive a school is the higher and narrower is the margin of test scores. The pandemic forced a larger number of universities to go test-optional, leaving them no-choice but to experiment this option. And due to this many schools will recieve larger number of applicants and from a broader pool and more diverse applicants. In addition to a strong academic record, these colleges will also look for well-rounded applicants who bring something unique to the student body. Highlighting extracurricular activities.
+It is upto the colleges to evaluate how the test-optional admissions will benefit them before reconsidering the value of the tests. This means looking at all the data before and after.
 
----
 
-### Submission
 
-**Materials must be submitted at 23:59 on Monday, July 12th.**
 
-Your technical report will be hosted on Github Enterprise. Make sure it includes:
 
-- A README.md (that isn't this file)
-- Jupyter notebook(s) with your analysis (renamed to describe your project)
-- Data files
-- Presentation slides
-- Any other necessary files (images, etc.)
 
-**Check with your local instructor for how they would like you to submit your repo for review.**
-
----
-
-### Presentation Structure
-
-- **Must be within time limit established by local instructor.**
-- Use Google Slides or some other visual aid (Keynote, Powerpoint, etc).
-- Consider the audience. Assume you are presenting to a non-technical audience (executives with the College Board, school administrators, admissions counselors, State officials, etc.).
-- Start with the **data science problem**.
-- Use visuals that are appropriately scaled and interpretable.
-- Talk about your procedure/methodology (high level, **CODE IS ALWAYS INAPPROPRIATE FOR A NON-TECHNICAL AUDIENCE**).
-- Talk about your primary findings.
-- Make sure you provide **clear recommendations** that follow logically from your analyses and narrative and answer your data science problem.
-
-Be sure to rehearse and time your presentation before class.
-
----
-
-### Rubric
-Your local instructor will evaluate your project (for the most part) using the following criteria.  You should make sure that you consider and/or follow most if not all of the considerations/recommendations outlined below **while** working through your project.
-
-**Scores will be out of 21 points based on the 7 items in the rubric.** <br>
-*3 points per section*<br>
-
-| Score | Interpretation |
-| --- | --- |
-| **0** | *Project fails to meet the minimum requirements for this item.* |
-| **1** | *Project meets the minimum requirements for this item, but falls significantly short of portfolio-ready expectations.* |
-| **2** | *Project exceeds the minimum requirements for this item, but falls short of portfolio-ready expectations.* |
-| **3** | *Project meets or exceeds portfolio-ready expectations; demonstrates a thorough understanding of every outlined consideration.* |
-
-**Project Organization**
-- Are modules imported correctly (using appropriate aliases)?
-- Are data imported/saved using relative paths?
-- Does the README provide a good executive summary of the project?
-- Is markdown formatting used appropriately to structure notebooks?
-- Are there an appropriate amount of comments to support the code?
-- Are files & directories organized correctly?
-- Are there unnecessary files included?
-- Do files and directories have well-structured, appropriate, consistent names?
-
-**Clarity of Message**
-- Is the problem statement clearly presented?
-- Does a strong narrative run through the project?
-- Does the student provide appropriate context to connect individual steps back to the overall project?
-- Is it clear how the final recommendations were reached?
-- Are the conclusions/recommendations clearly stated?
-
-**Python Syntax and Control Flow**
-- Is care taken to write human readable code?
-- Is the code syntactically correct (no runtime errors)?
-- Does the code generate desired results (logically correct)?
-- Does the code follows general best practices and style guidelines?
-- Are Pandas functions used appropriately?
-- Does the student demonstrate mastery masking in Pandas?
-- Does the student demonstrate mastery sorting in Pandas?
-
-**Data Cleaning and EDA**
-- Does the student fix data entry issues?
-- Are data appropriately labeled?
-- Are data appropriately typed?
-- Are datasets combined correctly?
-- Are appropriate summary statistics provided?
-- Are steps taken during data cleaning and EDA framed appropriately?
-
-**Visualizations**
-- Are the requested visualizations provided?
-- Do plots accurately demonstrate valid relationships?
-- Are plots labeled properly?
-- Plots interpreted appropriately?
-- Are plots formatted and scaled appropriately for inclusion in a notebook-based technical report?
-
-**Research and Conceptual Understanding**
-- Were useful insights gathered from outside sources?
-- Are sources clearly identified?
-- Does the student provide appropriate interpretation with regards to descriptive and inferential statistics?
-
-**Presentation**
-- Is the problem statement clearly presented?
-- Does a strong narrative run through the presentation building toward a final conclusion?
-- Are the conclusions/recommendations clearly stated?
-- Is the level of technicality appropriate for the intended audience?
-- Is the student substantially over or under time?
-- Does the student appropriately pace their presentation?
-- Does the student deliver their message with clarity and volume?
-- Are appropriate visualizations generated for the intended audience?
-- Are visualizations necessary and useful for supporting conclusions/explaining findings?
-
-In order to pass the project, students must earn a minimum score of 1 for each category.
-- Earning below a 1 in one or more of the above categories would result in a failing project.
-- While a minimum of 1 in each category is the required threshold for graduation, students should aim to earn at least an average of 1.5 across each category. An average score below 1.5, while it may be passing, means students may want to solicit specific feedback in order to significantly improve the project before showcasing it as part of a portfolio or the job search.
-
-### REMEMBER:
-
-This is a learning environment and you are encouraged to try new things, even if they don't work out as well as you planned! While this rubric outlines what we look for in a _good_ project, it is up to you to go above and beyond to create a _great_ project. **Learn from your failures and you'll be prepared to succeed in the workforce**.
